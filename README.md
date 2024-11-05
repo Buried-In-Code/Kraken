@@ -5,7 +5,7 @@
 ![Status](https://img.shields.io/badge/Status-Beta-yellowgreen?style=flat-square)
 
 [![Gradle](https://img.shields.io/badge/Gradle-8.10-informational?style=flat-square&logo=gradle)](https://github.com/gradle/gradle)
-[![Ktlint](https://img.shields.io/badge/Ktlint-1.3.1-informational?style=flat-square)](https://github.com/pinterest/ktlint)
+[![Ktlint](https://img.shields.io/badge/Ktlint-1.4.0-informational?style=flat-square)](https://github.com/pinterest/ktlint)
 
 [![Github - Version](https://img.shields.io/github/v/tag/Buried-In-Code/Kalibak?logo=Github&label=Version&style=flat-square)](https://github.com/Buried-In-Code/Kalibak/tags)
 [![Github - License](https://img.shields.io/github/license/Buried-In-Code/Kalibak?logo=Github&label=License&style=flat-square)](https://opensource.org/licenses/MIT)
@@ -30,7 +30,7 @@ Then, add Kalibak as a dependency.
 
 ```kts
 dependencies {
-    implementation("com.github.Buried-In-Code:Kalibak:0.1.0")
+    implementation("com.github.Buried-In-Code:Kalibak:0.2.0")
 }
 ```
 
