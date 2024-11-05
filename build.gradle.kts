@@ -14,7 +14,7 @@ println("Java v${System.getProperty("java.version")}")
 println("Arch: ${System.getProperty("os.arch")}")
 
 group = "github.buriedincode"
-version = "0.1.1"
+version = "0.2.0"
 
 repositories {
     mavenCentral()
@@ -46,6 +46,8 @@ configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
 }
 
 tasks.test {
+    environment("METRON__USERNAME", System.getenv("METRON__USERNAME"))
+    environment("METRON__PASSWORD", System.getenv("METRON__PASSWORD"))
     useJUnitPlatform()
     testLogging {
         events("passed", "skipped", "failed")

@@ -46,6 +46,7 @@ class Metron(
     password: String,
     private val cache: SQLiteCache? = null,
     timeout: Duration = Duration.ofSeconds(30),
+    var maxRetries: Int = 5,
 ) {
     private val client: HttpClient = HttpClient
         .newBuilder()
@@ -61,50 +62,63 @@ class Metron(
         return URI.create("$BASE_API$endpoint/${if (encodedParams.isNotEmpty()) "?$encodedParams" else ""}")
     }
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     private fun performGetRequest(uri: URI): String {
-        try {
-            @Suppress("ktlint:standard:max-line-length", "ktlint:standard:argument-list-wrapping")
-            val request = HttpRequest
-                .newBuilder()
-                .uri(uri)
-                .setHeader("Accept", "application/json")
-                .setHeader("User-Agent", "Kalibak/0.1.1 (${System.getProperty("os.name")}/${System.getProperty("os.version")}; Kotlin/${KotlinVersion.CURRENT})")
-                .setHeader("Authorization", this.authorization)
-                .GET()
-                .build()
-            val response = this.client.send(request, HttpResponse.BodyHandlers.ofString())
-            val level = when (response.statusCode()) {
-                in 100 until 200 -> Level.WARN
-                in 200 until 300 -> Level.DEBUG
-                in 300 until 400 -> Level.INFO
-                in 400 until 500 -> Level.WARN
-                else -> Level.ERROR
-            }
-            LOGGER.log(level) { "GET: ${response.statusCode()} - $uri" }
-            if (response.statusCode() == 200) {
-                return response.body()
-            }
+        var attempt = 0
+        var backoffDelay = 2000L
 
-            val content = JSON.parseToJsonElement(response.body()).jsonObject
-            LOGGER.error { content.toString() }
-            throw when (response.statusCode()) {
-                401 -> AuthenticationException(content["detail"]?.jsonPrimitive?.content ?: "")
-                404 -> ServiceException("Resource not found")
-                else -> ServiceException(content["detail"]?.jsonPrimitive?.content ?: "")
+        while (attempt < this.maxRetries) {
+            try {
+                @Suppress("ktlint:standard:max-line-length", "ktlint:standard:argument-list-wrapping")
+                val request = HttpRequest
+                    .newBuilder()
+                    .uri(uri)
+                    .setHeader("Accept", "application/json")
+                    .setHeader("User-Agent", "Kalibak/0.2.0 (${System.getProperty("os.name")}/${System.getProperty("os.version")}; Kotlin/${KotlinVersion.CURRENT})")
+                    .setHeader("Authorization", this.authorization)
+                    .GET()
+                    .build()
+                val response = this.client.send(request, HttpResponse.BodyHandlers.ofString())
+                val level = when (response.statusCode()) {
+                    in 100 until 200 -> Level.WARN
+                    in 200 until 300 -> Level.DEBUG
+                    in 300 until 400 -> Level.INFO
+                    in 400 until 500 -> Level.WARN
+                    else -> Level.ERROR
+                }
+                LOGGER.log(level) { "GET: ${response.statusCode()} - $uri" }
+                if (response.statusCode() == 200) {
+                    return response.body()
+                } else if (response.statusCode() == 429) {
+                    LOGGER.warn { "Received 429 Too Many Requests. Retrying in ${backoffDelay}ms..." }
+                    Thread.sleep(backoffDelay)
+                    backoffDelay *= 2
+                    attempt++
+                    continue
+                }
+
+                val content = JSON.parseToJsonElement(response.body()).jsonObject
+                LOGGER.error { content.toString() }
+                throw when (response.statusCode()) {
+                    401 -> AuthenticationException(content["detail"]?.jsonPrimitive?.content ?: "")
+                    404 -> ServiceException("Resource not found")
+                    else -> ServiceException(content["detail"]?.jsonPrimitive?.content ?: "")
+                }
+            } catch (ioe: IOException) {
+                throw ServiceException(cause = ioe)
+            } catch (hcte: HttpConnectTimeoutException) {
+                throw ServiceException(cause = hcte)
+            } catch (ie: InterruptedException) {
+                throw ServiceException(cause = ie)
+            } catch (se: SerializationException) {
+                throw ServiceException(cause = se)
             }
-        } catch (ioe: IOException) {
-            throw ServiceException(cause = ioe)
-        } catch (hcte: HttpConnectTimeoutException) {
-            throw ServiceException(cause = hcte)
-        } catch (ie: InterruptedException) {
-            throw ServiceException(cause = ie)
-        } catch (se: SerializationException) {
-            throw ServiceException(cause = se)
+            attempt++
         }
+        throw RateLimitException("Max retries reached for $uri")
     }
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     internal inline fun <reified T> getRequest(uri: URI): T {
         this.cache?.select(url = uri.toString())?.let {
             try {
@@ -124,7 +138,7 @@ class Metron(
         }
     }
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     private inline fun <reified T> fetchList(endpoint: String, params: Map<String, String>): List<T> {
         val resultList = mutableListOf<T>()
         var page = params.getOrDefault("page", "1").toInt()
@@ -139,81 +153,81 @@ class Metron(
         return resultList
     }
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     private inline fun <reified T> fetchItem(endpoint: String): T = this.getRequest<T>(uri = this.encodeURI(endpoint = endpoint))
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     fun listArcs(params: Map<String, String> = emptyMap()): List<BaseResource> {
         return this.fetchList<BaseResource>(endpoint = "/arc", params = params)
     }
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     fun getArc(id: Long): Arc = this.fetchItem<Arc>(endpoint = "/arc/$id")
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     fun listCharacters(params: Map<String, String> = emptyMap()): List<BaseResource> {
         return this.fetchList<BaseResource>(endpoint = "/character", params = params)
     }
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     fun getCharacter(id: Long): Character = this.fetchItem<Character>(endpoint = "/character/$id")
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     fun listCreators(params: Map<String, String> = emptyMap()): List<BaseResource> {
         return this.fetchList<BaseResource>(endpoint = "/creator", params = params)
     }
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     fun getCreator(id: Long): Creator = this.fetchItem<Creator>(endpoint = "/creator/$id")
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     fun listIssues(params: Map<String, String> = emptyMap()): List<BasicIssue> {
         return this.fetchList<BasicIssue>(endpoint = "/issue", params = params)
     }
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     fun getIssue(id: Long): Issue = this.fetchItem<Issue>(endpoint = "/issue/$id")
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     fun listPublishers(params: Map<String, String> = emptyMap()): List<BaseResource> {
         return this.fetchList<BaseResource>(endpoint = "/publisher", params = params)
     }
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     fun getPublisher(id: Long): Publisher = this.fetchItem<Publisher>(endpoint = "/publisher/$id")
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     fun listRoles(params: Map<String, String> = emptyMap()): List<GenericItem> {
         return this.fetchList<GenericItem>(endpoint = "/role", params = params)
     }
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     fun listSeries(params: Map<String, String> = emptyMap()): List<BasicSeries> {
         return this.fetchList<BasicSeries>(endpoint = "/series", params = params)
     }
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     fun getSeries(id: Long): Series = this.fetchItem<Series>(endpoint = "/series/$id")
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     fun listSeriesTypes(params: Map<String, String> = emptyMap()): List<GenericItem> {
         return this.fetchList<GenericItem>(endpoint = "/series_type", params = params)
     }
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     fun listTeams(params: Map<String, String> = emptyMap()): List<BaseResource> {
         return this.fetchList<BaseResource>(endpoint = "/team", params = params)
     }
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     fun getTeam(id: Long): Team = this.fetchItem<Team>(endpoint = "/team/$id")
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     fun listUniverses(params: Map<String, String> = emptyMap()): List<BaseResource> {
         return this.fetchList<BaseResource>(endpoint = "/universe", params = params)
     }
 
-    @Throws(ServiceException::class, AuthenticationException::class)
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     fun getUniverse(id: Long): Universe = this.fetchItem<Universe>(endpoint = "/universe/$id")
 
     companion object {
