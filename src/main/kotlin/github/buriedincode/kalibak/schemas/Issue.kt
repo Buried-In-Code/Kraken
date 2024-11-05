@@ -97,6 +97,7 @@ data class Issue(
         val seriesType: GenericItem,
         val sortName: String,
         val volume: Int,
+        val yearBegan: Int,
     )
 
     @Serializable

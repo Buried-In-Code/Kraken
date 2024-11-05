@@ -14,7 +14,7 @@ println("Java v${System.getProperty("java.version")}")
 println("Arch: ${System.getProperty("os.arch")}")
 
 group = "github.buriedincode"
-version = "0.1.0"
+version = "0.1.1"
 
 repositories {
     mavenCentral()
@@ -42,7 +42,7 @@ kotlin {
 }
 
 configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
-    version = "1.3.1"
+    version = "1.4.0"
 }
 
 tasks.test {
