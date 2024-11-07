@@ -44,7 +44,7 @@ import kotlin.text.toInt
 class Metron(
     username: String,
     password: String,
-    private val cache: SQLiteCache? = null,
+    val cache: SQLiteCache? = null,
     timeout: Duration = Duration.ofSeconds(30),
     var maxRetries: Int = 5,
 ) {
@@ -74,7 +74,7 @@ class Metron(
                     .newBuilder()
                     .uri(uri)
                     .setHeader("Accept", "application/json")
-                    .setHeader("User-Agent", "Kalibak/0.2.0 (${System.getProperty("os.name")}/${System.getProperty("os.version")}; Kotlin/${KotlinVersion.CURRENT})")
+                    .setHeader("User-Agent", "Kalibak/0.2.1 (${System.getProperty("os.name")}/${System.getProperty("os.version")}; Kotlin/${KotlinVersion.CURRENT})")
                     .setHeader("Authorization", this.authorization)
                     .GET()
                     .build()
