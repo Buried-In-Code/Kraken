@@ -14,7 +14,7 @@ println("Java v${System.getProperty("java.version")}")
 println("Arch: ${System.getProperty("os.arch")}")
 
 group = "github.buriedincode"
-version = "0.2.1"
+version = "0.2.2"
 
 repositories {
     mavenCentral()

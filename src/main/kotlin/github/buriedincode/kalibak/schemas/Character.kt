@@ -1,5 +1,6 @@
 package github.buriedincode.kalibak.schemas
 
+import github.buriedincode.kalibak.serializers.EmptyListSerializer
 import github.buriedincode.kalibak.serializers.NullableStringSerializer
 import kotlinx.datetime.Instant
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -9,6 +10,7 @@ import kotlinx.serialization.json.JsonNames
 @OptIn(ExperimentalSerializationApi::class)
 @Serializable
 data class Character(
+    @Serializable(with = EmptyListSerializer::class)
     val alias: List<String> = emptyList(),
     @JsonNames("cv_id")
     val comicvineId: Long? = null,

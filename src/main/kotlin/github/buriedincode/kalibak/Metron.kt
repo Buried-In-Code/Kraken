@@ -74,7 +74,7 @@ class Metron(
                     .newBuilder()
                     .uri(uri)
                     .setHeader("Accept", "application/json")
-                    .setHeader("User-Agent", "Kalibak/0.2.1 (${System.getProperty("os.name")}/${System.getProperty("os.version")}; Kotlin/${KotlinVersion.CURRENT})")
+                    .setHeader("User-Agent", "Kalibak/0.2.2 (${System.getProperty("os.name")}/${System.getProperty("os.version")}; Kotlin/${KotlinVersion.CURRENT})")
                     .setHeader("Authorization", this.authorization)
                     .GET()
                     .build()

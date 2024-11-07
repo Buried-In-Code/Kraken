@@ -69,5 +69,23 @@ class CharacterTest {
                 session.getCharacter(id = -1)
             }
         }
+
+        @Test
+        fun `Test GetCharacter with a null alias`() {
+            val result = session.getCharacter(id = 25657)
+            assertNotNull(result)
+            assertAll(
+                { assertTrue(result.alias.isEmpty()) },
+            )
+        }
+
+        @Test
+        fun `Test GetCharacter with an alias`() {
+            val result = session.getCharacter(id = 648)
+            assertNotNull(result)
+            assertAll(
+                { assertEquals("Spy-D", result.alias[0]) },
+            )
+        }
     }
 }
