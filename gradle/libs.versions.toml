@@ -11,11 +11,11 @@ versions = { id = "com.github.ben-manes.versions", version = "0.51.0" }
 [libraries]
 junit-jupiter-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junit" }
 junit-jupiter-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junit" }
-kotlin-logging = { group = "io.github.oshai", name = "kotlin-logging-jvm", version = "7.0.0" }
+kotlin-logging = { group = "io.github.oshai", name = "kotlin-logging-jvm", version = "7.0.3" }
 kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version = "0.6.1" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.7.3" }
-log4j2-slf4j2-impl = { group = "org.apache.logging.log4j", name = "log4j-slf4j2-impl", version = "2.24.2" }
+log4j2-slf4j2-impl = { group = "org.apache.logging.log4j", name = "log4j-slf4j2-impl", version = "2.24.3" }
 sqlite-jdbc = { group = "org.xerial", name = "sqlite-jdbc", version = "3.47.1.0" }
 
 [bundles]
