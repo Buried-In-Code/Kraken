@@ -67,6 +67,7 @@ class IssueTest {
                 { assertEquals(LocalDate(1991, 7, 1), result.coverDate) },
                 { assertEquals("87386cc738ac7b38", result.coverHash) },
                 { assertEquals(573, result.credits[0].id) },
+                { assertNull(result.grandComicsDatabaseId) },
                 { assertEquals(1088, result.id) },
                 { assertEquals("https://static.metron.cloud/media/issue/2019/01/21/bone-1.jpg", result.image) },
                 { assertNull(result.isbn) },
