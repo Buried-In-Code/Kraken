@@ -11,7 +11,6 @@
 [![Github - License](https://img.shields.io/github/license/Buried-In-Code/Kalibak?logo=Github&label=License&style=flat-square)](https://opensource.org/licenses/MIT)
 [![Github - Contributors](https://img.shields.io/github/contributors/Buried-In-Code/Kalibak?logo=Github&label=Contributors&style=flat-square)](https://github.com/Buried-In-Code/Kalibak/graphs/contributors)
 
-[![Github Action - CodeQL](https://img.shields.io/github/actions/workflow/status/Buried-In-Code/Kalibak/codeql.yml?branch=main&logo=githubactions&label=CodeQL&style=flat-square)](https://github.com/Buried-In-Code/Kalibak/actions/workflows/codeql.yml)
 [![Github Action - Testing](https://img.shields.io/github/actions/workflow/status/Buried-In-Code/Kalibak/testing.yaml?branch=main&logo=githubactions&label=Testing&style=flat-square)](https://github.com/Buried-In-Code/Kalibak/actions/workflows/testing.yaml)
 
 A Java/Kotlin wrapper for the [Metron](https://metron.cloud) API.
