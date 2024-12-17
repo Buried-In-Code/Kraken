@@ -5,6 +5,7 @@ import github.buriedincode.kalibak.SQLiteCache
 import github.buriedincode.kalibak.ServiceException
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Nested
@@ -53,6 +54,7 @@ class TeamTest {
             assertAll(
                 { assertEquals(62250, result.comicvineId) },
                 { assertTrue(result.creators.isEmpty()) },
+                { assertNull(result.grandComicsDatabaseId) },
                 { assertEquals(1473, result.id) },
                 { assertEquals("https://static.metron.cloud/media/team/2024/03/07/f957fc534c0245abafbecb5e8bb4dafa.jpg", result.image) },
                 { assertEquals("Rat Creatures", result.name) },

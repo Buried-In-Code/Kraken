@@ -42,7 +42,7 @@ kotlin {
 }
 
 configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
-    version = "1.4.1"
+    version = "1.5.0"
 }
 
 tasks.test {

@@ -45,6 +45,8 @@ data class Issue(
     @JsonNames("desc")
     @Serializable(with = NullableStringSerializer::class)
     val description: String? = null,
+    @JsonNames("gcd_id")
+    val grandComicsDatabaseId: Long? = null,
     val id: Long,
     @Serializable(with = NullableStringSerializer::class)
     val image: String? = null,

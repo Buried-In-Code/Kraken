@@ -5,6 +5,7 @@ import github.buriedincode.kalibak.SQLiteCache
 import github.buriedincode.kalibak.ServiceException
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Nested
@@ -52,6 +53,7 @@ class ArcTest {
             assertNotNull(result)
             assertAll(
                 { assertEquals(41751, result.comicvineId) },
+                { assertNull(result.grandComicsDatabaseId) },
                 { assertEquals(1491, result.id) },
                 { assertEquals("https://static.metron.cloud/media/arc/2024/03/07/d75aba2ca26349c89c3104690d32cc2f.jpg", result.image) },
                 { assertEquals("The Great Cow Race", result.name) },

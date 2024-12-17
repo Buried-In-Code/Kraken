@@ -5,6 +5,7 @@ import github.buriedincode.kalibak.SQLiteCache
 import github.buriedincode.kalibak.ServiceException
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Nested
@@ -53,6 +54,7 @@ class PublisherTest {
             assertAll(
                 { assertEquals(490, result.comicvineId) },
                 { assertEquals(1991, result.founded) },
+                { assertNull(result.grandComicsDatabaseId) },
                 { assertEquals(19, result.id) },
                 { assertEquals("https://static.metron.cloud/media/publisher/2019/01/21/cartoon-books.jpg", result.image) },
                 { assertEquals("Cartoon Books", result.name) },

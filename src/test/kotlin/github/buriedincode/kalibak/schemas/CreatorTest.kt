@@ -57,6 +57,7 @@ class CreatorTest {
                 { assertEquals(LocalDate(1960, 2, 27), result.birth) },
                 { assertEquals(23088, result.comicvineId) },
                 { assertNull(result.death) },
+                { assertNull(result.grandComicsDatabaseId) },
                 { assertEquals(573, result.id) },
                 { assertEquals("https://static.metron.cloud/media/creator/2018/12/06/jeff_smith.jpg", result.image) },
                 { assertEquals("Jeff Smith", result.name) },

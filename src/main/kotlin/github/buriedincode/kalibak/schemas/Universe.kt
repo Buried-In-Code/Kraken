@@ -14,6 +14,8 @@ data class Universe(
     val description: String? = null,
     @Serializable(with = NullableStringSerializer::class)
     val designation: String? = null,
+    @JsonNames("gcd_id")
+    val grandComicsDatabaseId: Long? = null,
     val id: Long,
     @Serializable(with = NullableStringSerializer::class)
     val image: String? = null,

@@ -28,6 +28,8 @@ data class Series(
     @JsonNames("desc")
     val description: String? = null,
     val genres: List<GenericItem> = emptyList(),
+    @JsonNames("gcd_id")
+    val grandComicsDatabaseId: Long? = null,
     val id: Long,
     val imprint: GenericItem? = null,
     val issueCount: Int,

@@ -14,6 +14,8 @@ data class Arc(
     @Serializable(with = NullableStringSerializer::class)
     @JsonNames("desc")
     val description: String? = null,
+    @JsonNames("gcd_id")
+    val grandComicsDatabaseId: Long? = null,
     val id: Long,
     @Serializable(with = NullableStringSerializer::class)
     val image: String? = null,
