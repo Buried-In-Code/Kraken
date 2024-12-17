@@ -5,6 +5,7 @@ import github.buriedincode.kalibak.SQLiteCache
 import github.buriedincode.kalibak.ServiceException
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Nested
@@ -57,6 +58,7 @@ class SeriesTest {
                 { assertTrue(result.associated.isEmpty()) },
                 { assertEquals(4691, result.comicvineId) },
                 { assertTrue(result.genres.isEmpty()) },
+                { assertNull(result.grandComicsDatabaseId) },
                 { assertEquals(119, result.id) },
                 { assertEquals(56, result.issueCount) },
                 { assertEquals("Bone", result.name) },

@@ -5,6 +5,7 @@ import github.buriedincode.kalibak.SQLiteCache
 import github.buriedincode.kalibak.ServiceException
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Nested
@@ -52,6 +53,7 @@ class UniverseTest {
             assertNotNull(result)
             assertAll(
                 { assertEquals("Earth 2", result.designation) },
+                { assertNull(result.grandComicsDatabaseId) },
                 { assertEquals(18, result.id) },
                 { assertEquals("https://static.metron.cloud/media/universe/2024/01/25/earth-2.webp", result.image) },
                 { assertEquals("Earth 2", result.name) },
