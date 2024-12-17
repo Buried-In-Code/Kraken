@@ -1,6 +1,6 @@
 package github.buriedincode.kalibak
 
-import github.buriedincode.kalibak.Utils.log
+import github.buriedincode.kalibak.log
 import github.buriedincode.kalibak.schemas.Arc
 import github.buriedincode.kalibak.schemas.BaseResource
 import github.buriedincode.kalibak.schemas.BasicIssue
@@ -74,7 +74,7 @@ class Metron(
                     .newBuilder()
                     .uri(uri)
                     .setHeader("Accept", "application/json")
-                    .setHeader("User-Agent", "Kalibak/0.2.2 (${System.getProperty("os.name")}/${System.getProperty("os.version")}; Kotlin/${KotlinVersion.CURRENT})")
+                    .setHeader("User-Agent", "Kalibak/$VERSION (${System.getProperty("os.name")}/${System.getProperty("os.version")}; Kotlin/${KotlinVersion.CURRENT})")
                     .setHeader("Authorization", this.authorization)
                     .GET()
                     .build()
