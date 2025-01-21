@@ -61,6 +61,7 @@ class IssueTest {
             val result = session.getIssue(id = 1088)
             assertNotNull(result)
             assertAll(
+                { assertNull(result.alternativeNumber) },
                 { assertTrue(result.arcs.isEmpty()) },
                 { assertEquals(1232, result.characters[0].id) },
                 { assertEquals(34352, result.comicvineId) },
@@ -70,6 +71,7 @@ class IssueTest {
                 { assertNull(result.grandComicsDatabaseId) },
                 { assertEquals(1088, result.id) },
                 { assertEquals("https://static.metron.cloud/media/issue/2019/01/21/bone-1.jpg", result.image) },
+                { assertNull(result.imprint) },
                 { assertNull(result.isbn) },
                 { assertEquals("1", result.number) },
                 { assertEquals(28, result.pageCount) },

@@ -8,6 +8,7 @@ import github.buriedincode.kalibak.schemas.BasicSeries
 import github.buriedincode.kalibak.schemas.Character
 import github.buriedincode.kalibak.schemas.Creator
 import github.buriedincode.kalibak.schemas.GenericItem
+import github.buriedincode.kalibak.schemas.Imprint
 import github.buriedincode.kalibak.schemas.Issue
 import github.buriedincode.kalibak.schemas.ListResponse
 import github.buriedincode.kalibak.schemas.Publisher
@@ -179,6 +180,14 @@ class Metron(
 
     @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     fun getCreator(id: Long): Creator = this.fetchItem<Creator>(endpoint = "/creator/$id")
+
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
+    fun listImprints(params: Map<String, String> = emptyMap()): List<BaseResource> {
+        return fetchList<BaseResource>(endpoint = "/imprint", params = params)
+    }
+
+    @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
+    fun getImprint(id: Long): Imprint = fetchItem<Imprint>(endpoint = "/imprint/$id")
 
     @Throws(ServiceException::class, AuthenticationException::class, RateLimitException::class)
     fun listIssues(params: Map<String, String> = emptyMap()): List<BasicIssue> {

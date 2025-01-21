@@ -34,6 +34,9 @@ data class BasicIssue(
 @OptIn(ExperimentalSerializationApi::class)
 @Serializable
 data class Issue(
+    @JsonNames("alt_number")
+    @Serializable(with = NullableStringSerializer::class)
+    val alternativeNumber: String? = null,
     val arcs: List<BaseResource> = emptyList(),
     val characters: List<BaseResource> = emptyList(),
     @JsonNames("cv_id")

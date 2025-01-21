@@ -31,7 +31,7 @@ class SeriesTest {
         @Test
         fun `Test ListSeries with a valid search`() {
             val results = session.listSeries(params = mapOf("name" to "Bone"))
-            assertEquals(9, results.size)
+            assertEquals(10, results.size)
             assertAll(
                 { assertEquals(119, results[0].id) },
                 { assertEquals(56, results[0].issueCount) },
@@ -60,6 +60,7 @@ class SeriesTest {
                 { assertTrue(result.genres.isEmpty()) },
                 { assertNull(result.grandComicsDatabaseId) },
                 { assertEquals(119, result.id) },
+                { assertNull(result.imprint) },
                 { assertEquals(56, result.issueCount) },
                 { assertEquals("Bone", result.name) },
                 { assertEquals(19, result.publisher.id) },

@@ -8,10 +8,9 @@ import kotlinx.serialization.json.JsonNames
 
 @OptIn(ExperimentalSerializationApi::class)
 @Serializable
-data class Publisher(
+data class Imprint(
     @JsonNames("cv_id")
     val comicvineId: Long? = null,
-    val country: String,
     @Serializable(with = NullableStringSerializer::class)
     @JsonNames("desc")
     val description: String? = null,
@@ -23,5 +22,6 @@ data class Publisher(
     val image: String? = null,
     val modified: Instant,
     val name: String,
+    val publisher: GenericItem,
     val resourceUrl: String,
 )

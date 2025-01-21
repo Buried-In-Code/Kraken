@@ -16,7 +16,7 @@ import org.junit.jupiter.api.assertAll
 import java.nio.file.Paths
 
 @TestInstance(Lifecycle.PER_CLASS)
-class PublisherTest {
+class ImprintTest {
     private val session: Metron
 
     init {
@@ -27,46 +27,51 @@ class PublisherTest {
     }
 
     @Nested
-    inner class ListPublishers {
+    inner class ListImprints {
         @Test
-        fun `Test ListPublishers with a valid search`() {
-            val results = session.listPublishers(params = mapOf("name" to "Cartoon Books"))
+        fun `Test ListImprints with a valid search`() {
+            val results = session.listImprints(params = mapOf("name" to "KaBOOM!"))
             assertEquals(1, results.size)
             assertAll(
-                { assertEquals(19, results[0].id) },
-                { assertEquals("Cartoon Books", results[0].name) },
+                { assertEquals(12, results[0].id) },
+                { assertEquals("KaBOOM!", results[0].name) },
             )
         }
 
         @Test
-        fun `Test ListPublishers with an invalid search`() {
-            val results = session.listPublishers(params = mapOf("name" to "INVALID"))
+        fun `Test ListImprints with an invalid search`() {
+            val results = session.listImprints(params = mapOf("name" to "INVALID"))
             assertTrue(results.isEmpty())
         }
     }
 
     @Nested
-    inner class GetPublisher {
+    inner class GetImprint {
         @Test
-        fun `Test GetPublisher with a valid id`() {
-            val result = session.getPublisher(id = 19)
+        fun `Test GetImprint with a valid id`() {
+            val result = session.getImprint(id = 12)
             assertNotNull(result)
             assertAll(
-                { assertEquals(490, result.comicvineId) },
-                { assertEquals("US", result.country) },
-                { assertEquals(1991, result.founded) },
+                { assertNull(result.comicvineId) },
+                { assertNull(result.founded) },
                 { assertNull(result.grandComicsDatabaseId) },
-                { assertEquals(19, result.id) },
-                { assertEquals("https://static.metron.cloud/media/publisher/2019/01/21/cartoon-books.jpg", result.image) },
-                { assertEquals("Cartoon Books", result.name) },
-                { assertEquals("https://metron.cloud/publisher/cartoon-books/", result.resourceUrl) },
+                { assertEquals(12, result.id) },
+                { assertEquals("https://static.metron.cloud/media/imprint/2024/08/13/kaboom.jpg", result.image) },
+                { assertEquals("KaBOOM!", result.name) },
+                {
+                    assertAll(
+                        { assertEquals(20, result.publisher.id) },
+                        { assertEquals("Boom! Studios", result.publisher.name) },
+                    )
+                },
+                { assertEquals("https://metron.cloud/imprint/kaboom/", result.resourceUrl) },
             )
         }
 
         @Test
-        fun `Test GetPublisher with an invalid id`() {
+        fun `Test GetImprint with an invalid id`() {
             assertThrows(ServiceException::class.java) {
-                session.getPublisher(id = -1)
+                session.getImprint(id = -1)
             }
         }
     }
