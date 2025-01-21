@@ -57,8 +57,12 @@ class UniverseTest {
                 { assertEquals(18, result.id) },
                 { assertEquals("https://static.metron.cloud/media/universe/2024/01/25/earth-2.webp", result.image) },
                 { assertEquals("Earth 2", result.name) },
-                { assertEquals(2, result.publisher.id) },
-                { assertEquals("DC Comics", result.publisher.name) },
+                {
+                    assertAll(
+                        { assertEquals(2, result.publisher.id) },
+                        { assertEquals("DC Comics", result.publisher.name) },
+                    )
+                },
                 { assertEquals("https://metron.cloud/universe/earth-2/", result.resourceUrl) },
             )
         }

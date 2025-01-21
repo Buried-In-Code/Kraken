@@ -63,11 +63,20 @@ class SeriesTest {
                 { assertNull(result.imprint) },
                 { assertEquals(56, result.issueCount) },
                 { assertEquals("Bone", result.name) },
-                { assertEquals(19, result.publisher.id) },
-                { assertEquals("Cartoon Books", result.publisher.name) },
+                {
+                    assertAll(
+                        { assertEquals(19, result.publisher.id) },
+                        { assertEquals("Cartoon Books", result.publisher.name) },
+                    )
+                },
                 { assertEquals("https://metron.cloud/series/bone-1991/", result.resourceUrl) },
-                { assertEquals(13, result.seriesType.id) },
-                { assertEquals("Single Issue", result.seriesType.name) },
+                {
+                    assertAll(
+                        { assertEquals(13, result.seriesType.id) },
+                        { assertEquals("Single Issue", result.seriesType.name) },
+                    )
+                },
+                { assertEquals("Cancelled", result.status) },
                 { assertEquals("Bone", result.sortName) },
                 { assertEquals(1, result.volume) },
                 { assertEquals(1991, result.yearBegan) },

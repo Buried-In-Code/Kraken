@@ -40,9 +40,13 @@ class IssueTest {
                 { assertEquals("https://static.metron.cloud/media/issue/2019/01/21/bone-1.jpg", results[0].image) },
                 { assertEquals("Bone (1991) #1", results[0].name) },
                 { assertEquals("1", results[0].number) },
-                { assertEquals("Bone", results[0].series.name) },
-                { assertEquals(1, results[0].series.volume) },
-                { assertEquals(1991, results[0].series.yearBegan) },
+                {
+                    assertAll(
+                        { assertEquals("Bone", results[0].series.name) },
+                        { assertEquals(1, results[0].series.volume) },
+                        { assertEquals(1991, results[0].series.yearBegan) },
+                    )
+                },
                 { assertNull(results[0].storeDate) },
             )
         }
@@ -63,11 +67,27 @@ class IssueTest {
             assertAll(
                 { assertNull(result.alternativeNumber) },
                 { assertTrue(result.arcs.isEmpty()) },
-                { assertEquals(1232, result.characters[0].id) },
+                {
+                    assertAll(
+                        { assertEquals(1232, result.characters[0].id) },
+                        { assertEquals("Fone Bone", result.characters[0].name) },
+                    )
+                },
                 { assertEquals(34352, result.comicvineId) },
                 { assertEquals(LocalDate(1991, 7, 1), result.coverDate) },
                 { assertEquals("87386cc738ac7b38", result.coverHash) },
-                { assertEquals(573, result.credits[0].id) },
+                {
+                    assertAll(
+                        { assertEquals("Jeff Smith", result.credits[0].creator) },
+                        { assertEquals(573, result.credits[0].id) },
+                        {
+                            assertAll(
+                                { assertEquals(1, result.credits[0].roles[0].id) },
+                                { assertEquals("Writer", result.credits[0].roles[0].name) },
+                            )
+                        },
+                    )
+                },
                 { assertNull(result.grandComicsDatabaseId) },
                 { assertEquals(1088, result.id) },
                 { assertEquals("https://static.metron.cloud/media/issue/2019/01/21/bone-1.jpg", result.image) },
@@ -76,23 +96,50 @@ class IssueTest {
                 { assertEquals("1", result.number) },
                 { assertEquals(28, result.pageCount) },
                 { assertEquals(2.95, result.price) },
-                { assertEquals(19, result.publisher.id) },
-                { assertEquals("Cartoon Books", result.publisher.name) },
-                { assertEquals(1, result.rating.id) },
-                { assertEquals("Unknown", result.rating.name) },
-                { assertEquals(113595, result.reprints[0].id) },
+                {
+                    assertAll(
+                        { assertEquals(19, result.publisher.id) },
+                        { assertEquals("Cartoon Books", result.publisher.name) },
+                    )
+                },
+                {
+                    assertAll(
+                        { assertEquals(1, result.rating.id) },
+                        { assertEquals("Unknown", result.rating.name) },
+                    )
+                },
+                {
+                    assertAll(
+                        { assertEquals(113595, result.reprints[0].id) },
+                        { assertEquals("Bone TPB (2004) #1", result.reprints[0].name) },
+                    )
+                },
                 { assertEquals("https://metron.cloud/issue/bone-1991-1/", result.resourceUrl) },
-                { assertTrue(result.series.genres.isEmpty()) },
-                { assertEquals(119, result.series.id) },
-                { assertEquals("Bone", result.series.name) },
-                { assertEquals(13, result.series.seriesType.id) },
-                { assertEquals("Single Issue", result.series.seriesType.name) },
-                { assertEquals("Bone", result.series.sortName) },
-                { assertEquals(1, result.series.volume) },
+                {
+                    assertAll(
+                        { assertTrue(result.series.genres.isEmpty()) },
+                        { assertEquals(119, result.series.id) },
+                        { assertEquals("Bone", result.series.name) },
+                        {
+                            assertAll(
+                                { assertEquals(13, result.series.seriesType.id) },
+                                { assertEquals("Single Issue", result.series.seriesType.name) },
+                            )
+                        },
+                        { assertEquals("Bone", result.series.sortName) },
+                        { assertEquals(1, result.series.volume) },
+                        { assertEquals(1991, result.series.yearBegan) },
+                    )
+                },
                 { assertNull(result.sku) },
                 { assertNull(result.storeDate) },
                 { assertEquals("The Map", result.stories[0]) },
-                { assertEquals(1473, result.teams[0].id) },
+                {
+                    assertAll(
+                        { assertEquals(1473, result.teams[0].id) },
+                        { assertEquals("Rat Creatures", result.teams[0].name) },
+                    )
+                },
                 { assertNull(result.title) },
                 { assertTrue(result.universes.isEmpty()) },
                 { assertNull(result.upc) },

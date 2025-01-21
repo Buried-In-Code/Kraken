@@ -83,7 +83,8 @@ data class Issue(
     data class Credit(
         val creator: String,
         val id: Long,
-        val role: List<GenericItem> = emptyList(),
+        @JsonNames("role")
+        val roles: List<GenericItem> = emptyList(),
     )
 
     @OptIn(ExperimentalSerializationApi::class)

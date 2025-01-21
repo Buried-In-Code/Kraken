@@ -54,7 +54,12 @@ class CharacterTest {
             assertAll(
                 { assertTrue(result.alias.isEmpty()) },
                 { assertEquals(23092, result.comicvineId) },
-                { assertEquals(573, result.creators[0].id) },
+                {
+                    assertAll(
+                        { assertEquals(573, result.creators[0].id) },
+                        { assertEquals("Jeff Smith", result.creators[0].name) },
+                    )
+                },
                 { assertNull(result.grandComicsDatabaseId) },
                 { assertEquals(1234, result.id) },
                 { assertEquals("https://static.metron.cloud/media/character/2019/01/21/Smiley-Bone.jpg", result.image) },
