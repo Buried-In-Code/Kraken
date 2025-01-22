@@ -76,7 +76,7 @@ tasks.withType<DependencyUpdatesTask> {
 
 publishing {
     publications {
-        create<MavenPublication>("kalibak") {
+        create<MavenPublication>("kraken") {
             from(components["java"])
         }
     }

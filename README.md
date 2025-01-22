@@ -1,4 +1,4 @@
-# Kalibak
+# Kraken
 
 ![Java Version](https://img.shields.io/badge/Temurin-17-green?style=flat-square&logo=eclipse-adoptium)
 ![Kotlin Version](https://img.shields.io/badge/Kotlin-2.1.0-green?style=flat-square&logo=kotlin)
@@ -7,17 +7,17 @@
 [![Gradle](https://img.shields.io/badge/Gradle-8.11.1-informational?style=flat-square&logo=gradle)](https://github.com/gradle/gradle)
 [![Ktlint](https://img.shields.io/badge/Ktlint-1.5.0-informational?style=flat-square)](https://github.com/pinterest/ktlint)
 
-[![Github - Version](https://img.shields.io/github/v/tag/Buried-In-Code/Kalibak?logo=Github&label=Version&style=flat-square)](https://github.com/Buried-In-Code/Kalibak/tags)
-[![Github - License](https://img.shields.io/github/license/Buried-In-Code/Kalibak?logo=Github&label=License&style=flat-square)](https://opensource.org/licenses/MIT)
-[![Github - Contributors](https://img.shields.io/github/contributors/Buried-In-Code/Kalibak?logo=Github&label=Contributors&style=flat-square)](https://github.com/Buried-In-Code/Kalibak/graphs/contributors)
+[![Github - Version](https://img.shields.io/github/v/tag/Buried-In-Code/Kraken?logo=Github&label=Version&style=flat-square)](https://github.com/Buried-In-Code/Kraken/tags)
+[![Github - License](https://img.shields.io/github/license/Buried-In-Code/Kraken?logo=Github&label=License&style=flat-square)](https://opensource.org/licenses/MIT)
+[![Github - Contributors](https://img.shields.io/github/contributors/Buried-In-Code/Kraken?logo=Github&label=Contributors&style=flat-square)](https://github.com/Buried-In-Code/Kraken/graphs/contributors)
 
-[![Github Action - Testing](https://img.shields.io/github/actions/workflow/status/Buried-In-Code/Kalibak/testing.yaml?branch=main&logo=githubactions&label=Testing&style=flat-square)](https://github.com/Buried-In-Code/Kalibak/actions/workflows/testing.yaml)
+[![Github Action - Testing](https://img.shields.io/github/actions/workflow/status/Buried-In-Code/Kraken/testing.yaml?branch=main&logo=githubactions&label=Testing&style=flat-square)](https://github.com/Buried-In-Code/Kraken/actions/workflows/testing.yaml)
 
 A Java/Kotlin wrapper for the [Metron](https://metron.cloud) API.
 
 ## Getting started
 
-To get started with Kalibak, add the [JitPack](https://jitpack.io) repository to your `build.gradle.kts`.
+To get started with Kraken, add the [JitPack](https://jitpack.io) repository to your `build.gradle.kts`.
 
 ```kts
 repositories {
@@ -25,25 +25,25 @@ repositories {
 }
 ```
 
-Then, add Kalibak as a dependency.
+Then, add Kraken as a dependency.
 
 ```kts
 dependencies {
-    implementation("com.github.Buried-In-Code:Kalibak:0.2.3")
+    implementation("com.github.Buried-In-Code:Kraken:0.2.3")
 }
 ```
 
 ### Usage
 
 ```kt
-import github.buriedincode.kalibak.Metron
-import github.buriedincode.kalibak.SQLiteCache
-import github.buriedincode.kalibak.AuthenticationException
-import github.buriedincode.kalibak.ServiceException
+import github.buriedincode.kraken.Metron
+import github.buriedincode.kraken.SQLiteCache
+import github.buriedincode.kraken.AuthenticationException
+import github.buriedincode.kraken.ServiceException
 
 fun main() {
     try {
-        val session = Metron("Username", "Password", cache=SQLiteCache())
+        val session = Metron(username="Username", password="Password", cache=SQLiteCache())
 
         // Get all Marvel comics for the week of 2021-06-07
         val thisWeek = session.listIssues(params = mapOf(
