@@ -69,8 +69,6 @@ fun main() {
 }
 ```
 
-For a complete list of available query parameters, refer to [Metron's API docs](https://metron.cloud/docs/).
-
 ## Socials
 
 [![Social - Fosstodon](https://img.shields.io/badge/%40BuriedInCode-teal?label=Fosstodon&logo=mastodon&style=for-the-badge)](https://fosstodon.org/@BuriedInCode)\
