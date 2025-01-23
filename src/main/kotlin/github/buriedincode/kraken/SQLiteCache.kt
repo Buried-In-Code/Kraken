@@ -5,6 +5,15 @@ import java.sql.Date
 import java.sql.DriverManager
 import java.time.LocalDate
 
+/**
+ * A simple SQLite-based caching mechanism for storing and retrieving HTTP query results.
+ *
+ * The `SQLiteCache` class provides methods to persist query results, retrieve them later, and automatically clean up expired entries based on a configurable expiry period.
+ *
+ * @property path The file path to the SQLite database file.
+ * @property expiry The number of days before cached entries expire. If `null`, entries will not expire.
+ * @constructor Initializes the SQLite cache, creating the necessary table and performing cleanup for expired entries.
+ */
 data class SQLiteCache(val path: Path, val expiry: Int? = null) {
     private val databaseUrl: String = "jdbc:sqlite:$path"
 
@@ -13,6 +22,9 @@ data class SQLiteCache(val path: Path, val expiry: Int? = null) {
         this.cleanup()
     }
 
+    /**
+     * Creates the `queries` table in the SQLite database if it does not already exist.
+     */
     private fun createTable() {
         val query = "CREATE TABLE IF NOT EXISTS queries (url, response, query_date);"
         DriverManager.getConnection(this.databaseUrl).use {
@@ -22,6 +34,14 @@ data class SQLiteCache(val path: Path, val expiry: Int? = null) {
         }
     }
 
+    /**
+     * Selects a cached response for a given URL.
+     *
+     * If an expiry is set, only entries that have not expired will be retrieved.
+     *
+     * @param url The URL whose cached response is to be retrieved.
+     * @return The cached response as a string, or `null` if no valid entry exists.
+     */
     fun select(url: String): String? {
         val query = if (this.expiry == null) {
             "SELECT * FROM queries WHERE url = ?;"
@@ -41,6 +61,14 @@ data class SQLiteCache(val path: Path, val expiry: Int? = null) {
         }
     }
 
+    /**
+     * Inserts a new cached response for a given URL.
+     *
+     * If an entry for the URL already exists, the method does nothing.
+     *
+     * @param url The URL whose response is to be cached.
+     * @param response The response to cache as a string.
+     */
     fun insert(url: String, response: String) {
         if (this.select(url = url) != null) {
             return
@@ -56,6 +84,11 @@ data class SQLiteCache(val path: Path, val expiry: Int? = null) {
         }
     }
 
+    /**
+     * Deletes a cached response for a given URL.
+     *
+     * @param url The URL whose cached response is to be deleted.
+     */
     fun delete(url: String) {
         val query = "DELETE FROM queries WHERE url = ?;"
         DriverManager.getConnection(this.databaseUrl).use {
@@ -66,6 +99,11 @@ data class SQLiteCache(val path: Path, val expiry: Int? = null) {
         }
     }
 
+    /**
+     * Cleans up expired entries in the cache.
+     *
+     * If an expiry is set, this method removes all entries with a `query_date` older than the expiry period.
+     */
     fun cleanup() {
         if (this.expiry == null) {
             return

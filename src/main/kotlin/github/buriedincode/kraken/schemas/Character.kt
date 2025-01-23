@@ -7,6 +7,22 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonNames
 
+/**
+ * A data model representing a character.
+ *
+ * @property alias The aliases of the character.
+ * @property comicvineId The Comic Vine ID of the character.
+ * @property creators The creators of the character.
+ * @property description The description of the character.
+ * @property grandComicsDatabaseId The Grand Comics Database ID of the character
+ * @property id The unique identifier of the resource.
+ * @property image The image URL of the character.
+ * @property modified The date and time when the resource was last modified.
+ * @property name The name of the resource.
+ * @property resourceUrl The URL of the character resource.
+ * @property teams The teams the character belongs to.
+ * @property universes The universes the character is associated with.
+ */
 @OptIn(ExperimentalSerializationApi::class)
 @Serializable
 data class Character(

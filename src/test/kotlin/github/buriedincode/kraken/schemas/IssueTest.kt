@@ -38,7 +38,7 @@ class IssueTest {
                 { assertEquals("87386cc738ac7b38", results[0].coverHash) },
                 { assertEquals(1088, results[0].id) },
                 { assertEquals("https://static.metron.cloud/media/issue/2019/01/21/bone-1.jpg", results[0].image) },
-                { assertEquals("Bone (1991) #1", results[0].name) },
+                { assertEquals("Bone (1991) #1", results[0].title) },
                 { assertEquals("1", results[0].number) },
                 {
                     assertAll(
@@ -111,7 +111,7 @@ class IssueTest {
                 {
                     assertAll(
                         { assertEquals(113595, result.reprints[0].id) },
-                        { assertEquals("Bone TPB (2004) #1", result.reprints[0].name) },
+                        { assertEquals("Bone TPB (2004) #1", result.reprints[0].issue) },
                     )
                 },
                 { assertEquals("https://metron.cloud/issue/bone-1991-1/", result.resourceUrl) },

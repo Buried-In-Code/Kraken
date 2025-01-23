@@ -1,4 +1,4 @@
-name: Deploy dokka to Github Pages
+name: Deploy docs
 
 on:
   push:

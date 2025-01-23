@@ -6,6 +6,19 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonNames
 
+/**
+ * A data model representing a universe.
+ *
+ * @property description The description of the universe.
+ * @property designation The designation fo the universe.
+ * @property grandComicsDatabaseId The Grand Comics Database ID of the universe.
+ * @property id The unique identifier of the resource.
+ * @property image The image URL of the universe.
+ * @property modified The date and time when the resource was last modified.
+ * @property name The name of the resource.
+ * @property publisher The publisher of the universe.
+ * @property resourceUrl The URL of the universe.
+ */
 @OptIn(ExperimentalSerializationApi::class)
 @Serializable
 data class Universe(
