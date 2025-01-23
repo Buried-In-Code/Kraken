@@ -111,7 +111,7 @@ class IssueTest {
                 {
                     assertAll(
                         { assertEquals(113595, result.reprints[0].id) },
-                        { assertEquals("Bone TPB (2004) #1", result.reprints[0].name) },
+                        { assertEquals("Bone TPB (2004) #1", result.reprints[0].issue) },
                     )
                 },
                 { assertEquals("https://metron.cloud/issue/bone-1991-1/", result.resourceUrl) },
