@@ -4,7 +4,7 @@
 ![Kotlin Version](https://img.shields.io/badge/Kotlin-2.1.0-green?style=flat-square&logo=kotlin)
 ![Status](https://img.shields.io/badge/Status-Beta-yellowgreen?style=flat-square)
 
-[![Gradle](https://img.shields.io/badge/Gradle-8.11.1-informational?style=flat-square&logo=gradle)](https://github.com/gradle/gradle)
+[![Gradle](https://img.shields.io/badge/Gradle-8.12.0-informational?style=flat-square&logo=gradle)](https://github.com/gradle/gradle)
 [![Ktlint](https://img.shields.io/badge/Ktlint-1.5.0-informational?style=flat-square)](https://github.com/pinterest/ktlint)
 
 [![Github - Version](https://img.shields.io/github/v/tag/Buried-In-Code/Kraken?logo=Github&label=Version&style=flat-square)](https://github.com/Buried-In-Code/Kraken/tags)
@@ -12,10 +12,11 @@
 [![Github - Contributors](https://img.shields.io/github/contributors/Buried-In-Code/Kraken?logo=Github&label=Contributors&style=flat-square)](https://github.com/Buried-In-Code/Kraken/graphs/contributors)
 
 [![Github Action - Testing](https://img.shields.io/github/actions/workflow/status/Buried-In-Code/Kraken/testing.yaml?branch=main&logo=githubactions&label=Testing&style=flat-square)](https://github.com/Buried-In-Code/Kraken/actions/workflows/testing.yaml)
+[![Github Action - Documentation](https://img.shields.io/github/actions/workflow/status/Buried-In-Code/Kraken/docs.yaml?branch=main&logo=githubactions&label=Documentation&style=flat-square)](https://github.com/Buried-In-Code/Kraken/actions/workflows/docs.yaml)
 
 A Java/Kotlin wrapper for the [Metron](https://metron.cloud) API.
 
-## Getting started
+## Installation
 
 To get started with Kraken, add the [JitPack](https://jitpack.io) repository to your `build.gradle.kts`.
 
@@ -33,7 +34,7 @@ dependencies {
 }
 ```
 
-### Usage
+### Example Usage
 
 ```kt
 import github.buriedincode.kraken.Metron
@@ -68,6 +69,15 @@ fun main() {
   }
 }
 ```
+
+## Documentation
+
+- [Kraken](https://buried-in-code.github.io/Kraken)
+- [Metron API](https://metron.cloud/docs/)
+
+## Bugs/Requests
+
+Please use the [GitHub issue tracker](https://github.com/Buried-In-Code/Kraken/issues) to submit bugs or request features.
 
 ## Socials
 

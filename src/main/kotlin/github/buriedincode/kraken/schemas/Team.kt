@@ -6,6 +6,20 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonNames
 
+/**
+ * A data model representing a team.
+ *
+ * @property comicvineId The Comic Vine ID of the team.
+ * @property creators The creators of the team.
+ * @property description The description of the team.
+ * @property grandComicsDatabaseId The Grand Comics Database ID of the team.
+ * @property id The unique identifier of the resource.
+ * @property image The image URL of the team.
+ * @property modified The date and time when the resource was last modified.
+ * @property name The name of the resource.
+ * @property resourceUrl The URL of the team.
+ * @property universes The universes the team is associated with.
+ */
 @OptIn(ExperimentalSerializationApi::class)
 @Serializable
 data class Team(
