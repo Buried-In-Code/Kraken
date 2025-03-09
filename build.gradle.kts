@@ -30,8 +30,8 @@ dependencies {
     implementation(libs.bundles.kotlinx.serialization)
     implementation(libs.kotlin.logging)
     runtimeOnly(libs.sqlite.jdbc)
-    testImplementation(libs.junit.jupiter.api)
-    testRuntimeOnly(libs.junit.jupiter.engine)
+    testImplementation(libs.junit.jupiter)
+    testRuntimeOnly(libs.junit.platform.launcher)
     testRuntimeOnly(libs.kotlin.reflect)
     testRuntimeOnly(libs.log4j2.slf4j2.impl)
 }
