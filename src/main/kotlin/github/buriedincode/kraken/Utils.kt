@@ -26,4 +26,4 @@ internal fun KLogger.log(level: Level, message: () -> Any?) {
 /**
  * The version of the Kraken library.
  */
-internal const val VERSION = "0.3.0"
+internal const val VERSION = "0.3.1"
