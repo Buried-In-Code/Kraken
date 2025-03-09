@@ -31,7 +31,7 @@ class SeriesTest {
         @Test
         fun `Test ListSeries with a valid search`() {
             val results = session.listSeries(params = mapOf("name" to "Bone"))
-            assertEquals(10, results.size)
+            assertEquals(12, results.size)
             assertAll(
                 { assertEquals(119, results[0].id) },
                 { assertEquals(56, results[0].issueCount) },

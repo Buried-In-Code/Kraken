@@ -19,7 +19,7 @@ println("Java v${System.getProperty("java.version")}")
 println("Arch: ${System.getProperty("os.arch")}")
 
 group = "github.buriedincode"
-version = "0.3.0"
+version = "0.3.1"
 
 repositories {
     mavenCentral()
@@ -30,8 +30,8 @@ dependencies {
     implementation(libs.bundles.kotlinx.serialization)
     implementation(libs.kotlin.logging)
     runtimeOnly(libs.sqlite.jdbc)
-    testImplementation(libs.junit.jupiter.api)
-    testRuntimeOnly(libs.junit.jupiter.engine)
+    testImplementation(libs.junit.jupiter)
+    testRuntimeOnly(libs.junit.platform.launcher)
     testRuntimeOnly(libs.kotlin.reflect)
     testRuntimeOnly(libs.log4j2.slf4j2.impl)
 }
