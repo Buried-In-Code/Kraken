@@ -14,7 +14,7 @@ junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform
 kotlin-logging = { group = "io.github.oshai", name = "kotlin-logging-jvm", version = "7.0.6" }
 kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version = "0.6.2" }
-kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.8.0" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.8.1" }
 log4j2-slf4j2-impl = { group = "org.apache.logging.log4j", name = "log4j-slf4j2-impl", version = "2.24.3" }
 sqlite-jdbc = { group = "org.xerial", name = "sqlite-jdbc", version = "3.49.1.0" }
 
