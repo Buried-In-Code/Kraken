@@ -1,7 +1,8 @@
 package github.buriedincode.kraken.schemas
 
 import github.buriedincode.kraken.serializers.NullableStringSerializer
-import kotlinx.datetime.Instant
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 import kotlinx.serialization.Serializable
 
 /**
@@ -12,16 +13,13 @@ import kotlinx.serialization.Serializable
  * @property next The URL for the next page of results, if available. `null` if there are no more pages.
  * @property previous The URL for the previous page of results, if available. `null` if on the first page.
  * @property results A list of items of type `T` returned by the API.
- *
  */
 @Serializable
 data class ListResponse<T>(
-    val count: Int,
-    @Serializable(with = NullableStringSerializer::class)
-    val next: String? = null,
-    @Serializable(with = NullableStringSerializer::class)
-    val previous: String? = null,
-    val results: List<T> = listOf(),
+  val count: Int,
+  @Serializable(with = NullableStringSerializer::class) val next: String? = null,
+  @Serializable(with = NullableStringSerializer::class) val previous: String? = null,
+  val results: List<T> = listOf(),
 )
 
 /**
@@ -30,11 +28,7 @@ data class ListResponse<T>(
  * @property id The unique identifier of the generic item.
  * @property name The name fo the generic item.
  */
-@Serializable
-data class GenericItem(
-    val id: Long,
-    val name: String,
-)
+@Serializable data class GenericItem(val id: Long, val name: String)
 
 /**
  * A data model representing a base resource.
@@ -43,9 +37,6 @@ data class GenericItem(
  * @property modified The date and time when the base resource was last modified.
  * @property name The name of the base resource.
  */
+@OptIn(ExperimentalTime::class)
 @Serializable
-data class BaseResource(
-    val id: Long,
-    val modified: Instant,
-    val name: String,
-)
+data class BaseResource(val id: Long, val modified: Instant, val name: String)

@@ -1,11 +1,11 @@
 # Kraken
 
-![Java Version](https://img.shields.io/badge/Temurin-17-green?style=flat-square&logo=eclipse-adoptium)
-![Kotlin Version](https://img.shields.io/badge/Kotlin-2.1.0-green?style=flat-square&logo=kotlin)
+![Java Version](https://img.shields.io/badge/Temurin-21-green?style=flat-square&logo=eclipse-adoptium)
+![Kotlin Version](https://img.shields.io/badge/Kotlin-2.2.0-green?style=flat-square&logo=kotlin)
 ![Status](https://img.shields.io/badge/Status-Beta-yellowgreen?style=flat-square)
 
-[![Gradle](https://img.shields.io/badge/Gradle-8.12.0-informational?style=flat-square&logo=gradle)](https://github.com/gradle/gradle)
-[![Ktlint](https://img.shields.io/badge/Ktlint-1.5.0-informational?style=flat-square)](https://github.com/pinterest/ktlint)
+[![Gradle](https://img.shields.io/badge/Gradle-8.14.3-informational?style=flat-square&logo=gradle)](https://github.com/gradle/gradle)
+[![Spotless](https://img.shields.io/badge/Spotless-7.1.0-informational?style=flat-square)](https://github.com/diffplug/spotless)
 
 [![Github - Version](https://img.shields.io/github/v/tag/Buried-In-Code/Kraken?logo=Github&label=Version&style=flat-square)](https://github.com/Buried-In-Code/Kraken/tags)
 [![Github - License](https://img.shields.io/github/license/Buried-In-Code/Kraken?logo=Github&label=License&style=flat-square)](https://opensource.org/licenses/MIT)
@@ -30,7 +30,7 @@ Then, add Kraken as a dependency.
 
 ```kts
 dependencies {
-    implementation("com.github.Buried-In-Code:Kraken:0.2.3")
+    implementation("com.github.Buried-In-Code:Kraken:0.4.0")
 }
 ```
 
@@ -40,6 +40,7 @@ dependencies {
 import github.buriedincode.kraken.Metron
 import github.buriedincode.kraken.SQLiteCache
 import github.buriedincode.kraken.AuthenticationException
+import github.buriedincode.kraken.RateLimitException
 import github.buriedincode.kraken.ServiceException
 
 fun main() {
@@ -64,6 +65,8 @@ fun main() {
 
   } catch (ae: AuthenticationException) {
       println("Invalid Metron Username/Password.")
+  } catch(re: RatelimitException) {
+      println("Rate limit exceeded. Please try again later.")
   } catch (se: ServiceException) {
       println("Unsuccessful request: ${se.message}")
   }

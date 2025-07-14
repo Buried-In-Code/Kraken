@@ -1,7 +1,8 @@
 package github.buriedincode.kraken.schemas
 
 import github.buriedincode.kraken.serializers.NullableStringSerializer
-import kotlinx.datetime.Instant
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonNames
@@ -20,22 +21,17 @@ import kotlinx.serialization.json.JsonNames
  * @property publisher The generic item representing the publisher.
  * @property resourceUrl The URL of the publisher resource.
  */
-@OptIn(ExperimentalSerializationApi::class)
+@OptIn(ExperimentalSerializationApi::class, ExperimentalTime::class)
 @Serializable
 data class Imprint(
-    @JsonNames("cv_id")
-    val comicvineId: Long? = null,
-    @Serializable(with = NullableStringSerializer::class)
-    @JsonNames("desc")
-    val description: String? = null,
-    val founded: Int? = null,
-    @JsonNames("gcd_id")
-    val grandComicsDatabaseId: Long? = null,
-    val id: Long,
-    @Serializable(with = NullableStringSerializer::class)
-    val image: String? = null,
-    val modified: Instant,
-    val name: String,
-    val publisher: GenericItem,
-    val resourceUrl: String,
+  @JsonNames("cv_id") val comicvineId: Long? = null,
+  @Serializable(with = NullableStringSerializer::class) @JsonNames("desc") val description: String? = null,
+  val founded: Int? = null,
+  @JsonNames("gcd_id") val grandComicsDatabaseId: Long? = null,
+  val id: Long,
+  @Serializable(with = NullableStringSerializer::class) val image: String? = null,
+  val modified: Instant,
+  val name: String,
+  val publisher: GenericItem,
+  val resourceUrl: String,
 )
