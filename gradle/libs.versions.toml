@@ -5,18 +5,17 @@ kotlin = "2.2.0"
 dokka = { id = "org.jetbrains.dokka", version = "2.0.0" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-ktlint = { id = "org.jlleitschuh.gradle.ktlint", version = "13.0.0" }
+spotless = { id = "com.diffplug.spotless", version = "7.1.0" }
 versions = { id = "com.github.ben-manes.versions", version = "0.52.0" }
 
 [libraries]
-junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version = "5.13.3" }
-junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher" }
-kotlin-logging = { group = "io.github.oshai", name = "kotlin-logging-jvm", version = "7.0.7" }
-kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
-kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version = "0.7.1-0.6.x-compat" }
-kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.9.0" }
-log4j2-slf4j2-impl = { group = "org.apache.logging.log4j", name = "log4j-slf4j2-impl", version = "2.25.1" }
-sqlite-jdbc = { group = "org.xerial", name = "sqlite-jdbc", version = "3.50.2.0" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version = "5.13.3" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version = "1.13.3" }
+kotlin-logging = { module = "io.github.oshai:kotlin-logging-jvm", version = "7.0.7" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.7.1" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.9.0" }
+log4j2-slf4j2 = { module = "org.apache.logging.log4j:log4j-slf4j2-impl", version = "2.25.1" }
+sqlite-jdbc = { module = "org.xerial:sqlite-jdbc", version = "3.50.2.0" }
 
 [bundles]
 kotlinx-serialization = ["kotlinx-serialization-json", "kotlinx-datetime"]

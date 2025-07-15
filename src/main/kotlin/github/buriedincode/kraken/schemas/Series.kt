@@ -1,7 +1,8 @@
 package github.buriedincode.kraken.schemas
 
 import github.buriedincode.kraken.serializers.NullableStringSerializer
-import kotlinx.datetime.Instant
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonNames
@@ -16,16 +17,15 @@ import kotlinx.serialization.json.JsonNames
  * @property volume The volume number of the series.
  * @property yearBegan The year the series began.
  */
-@OptIn(ExperimentalSerializationApi::class)
+@OptIn(ExperimentalSerializationApi::class, ExperimentalTime::class)
 @Serializable
 data class BasicSeries(
-    val id: Long,
-    val issueCount: Int,
-    val modified: Instant,
-    @JsonNames("series")
-    val name: String,
-    val volume: Int,
-    val yearBegan: Int,
+  val id: Long,
+  val issueCount: Int,
+  val modified: Instant,
+  @JsonNames("series") val name: String,
+  val volume: Int,
+  val yearBegan: Int,
 )
 
 /**
@@ -50,43 +50,35 @@ data class BasicSeries(
  * @property yearBegan The year the series began.
  * @property yearEnd The year the series ended.
  */
-@OptIn(ExperimentalSerializationApi::class)
+@OptIn(ExperimentalSerializationApi::class, ExperimentalTime::class)
 @Serializable
 data class Series(
-    val associated: List<Associated> = emptyList(),
-    @JsonNames("cv_id")
-    val comicvineId: Long? = null,
-    @Serializable(with = NullableStringSerializer::class)
-    @JsonNames("desc")
-    val description: String? = null,
-    val genres: List<GenericItem> = emptyList(),
-    @JsonNames("gcd_id")
-    val grandComicsDatabaseId: Long? = null,
-    val id: Long,
-    val imprint: GenericItem? = null,
-    val issueCount: Int,
-    val modified: Instant,
-    val name: String,
-    val publisher: GenericItem,
-    val resourceUrl: String,
-    val seriesType: GenericItem,
-    val status: String,
-    val sortName: String,
-    val volume: Int,
-    val yearBegan: Int,
-    val yearEnd: Int? = null,
+  val associated: List<Associated> = emptyList(),
+  @JsonNames("cv_id") val comicvineId: Long? = null,
+  @Serializable(with = NullableStringSerializer::class) @JsonNames("desc") val description: String? = null,
+  val genres: List<GenericItem> = emptyList(),
+  @JsonNames("gcd_id") val grandComicsDatabaseId: Long? = null,
+  val id: Long,
+  val imprint: GenericItem? = null,
+  val issueCount: Int,
+  val modified: Instant,
+  val name: String,
+  val publisher: GenericItem,
+  val resourceUrl: String,
+  val seriesType: GenericItem,
+  val status: String,
+  val sortName: String,
+  val volume: Int,
+  val yearBegan: Int,
+  val yearEnd: Int? = null,
 ) {
-    /**
-     * A data model representing an associated series.
-     *
-     * @property id The unique identifier of the associated series.
-     * @property name The name of the associated series.
-     */
-    @OptIn(ExperimentalSerializationApi::class)
-    @Serializable
-    data class Associated(
-        val id: Long,
-        @JsonNames("series")
-        val name: String,
-    )
+  /**
+   * A data model representing an associated series.
+   *
+   * @property id The unique identifier of the associated series.
+   * @property name The name of the associated series.
+   */
+  @OptIn(ExperimentalSerializationApi::class)
+  @Serializable
+  data class Associated(val id: Long, @JsonNames("series") val name: String)
 }
