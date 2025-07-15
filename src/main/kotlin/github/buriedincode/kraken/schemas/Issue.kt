@@ -55,6 +55,7 @@ data class BasicIssue(
  * @property coverHash The hash value of the issue cover.
  * @property credits The credits for the issue.
  * @property description The description of the issue.
+ * @property focDate The final order cutoff date of the issue.
  * @property grandComicsDatabaseId The Grand Comics Database ID of the issue.
  * @property id The unique identifier of the issue.
  * @property image The image URL of the issue.
@@ -89,6 +90,7 @@ data class Issue(
   @Serializable(with = NullableStringSerializer::class) val coverHash: String? = null,
   val credits: List<Credit> = emptyList(),
   @JsonNames("desc") @Serializable(with = NullableStringSerializer::class) val description: String? = null,
+  val focDate: LocalDate? = null,
   @JsonNames("gcd_id") val grandComicsDatabaseId: Long? = null,
   val id: Long,
   @Serializable(with = NullableStringSerializer::class) val image: String? = null,

@@ -88,6 +88,7 @@ class IssueTest {
             },
           )
         },
+        { assertNull(result.focDate) },
         { assertNull(result.grandComicsDatabaseId) },
         { assertEquals(1088, result.id) },
         { assertEquals("https://static.metron.cloud/media/issue/2019/01/21/bone-1.jpg", result.image) },

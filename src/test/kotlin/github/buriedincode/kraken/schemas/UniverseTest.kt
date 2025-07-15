@@ -31,7 +31,7 @@ class UniverseTest {
     @Test
     fun `Test ListUniverses with a valid search`() {
       val results = session.listUniverses(params = mapOf("name" to "Earth 2"))
-      assertEquals(5, results.size)
+      assertEquals(6, results.size)
       assertAll({ assertEquals(18, results[0].id) }, { assertEquals("Earth 2", results[0].name) })
     }
 
