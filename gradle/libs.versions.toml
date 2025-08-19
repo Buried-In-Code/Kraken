@@ -11,7 +11,7 @@ versions = { id = "com.github.ben-manes.versions", version = "0.52.0" }
 [libraries]
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version = "5.13.4" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version = "1.13.4" }
-kotlin-logging = { module = "io.github.oshai:kotlin-logging-jvm", version = "7.0.12" }
+kotlin-logging = { module = "io.github.oshai:kotlin-logging-jvm", version = "7.0.13" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.7.1" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.9.0" }
 log4j2-slf4j2 = { module = "org.apache.logging.log4j:log4j-slf4j2-impl", version = "2.25.1" }
