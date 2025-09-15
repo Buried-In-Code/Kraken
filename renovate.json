@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "git+https://codeberg.org/BuriedInCode/renovate/raw/branch/main/default.json"
+    "git+https://codeberg.org/BuriedInCode/renovate//default.json"
   ]
 }
